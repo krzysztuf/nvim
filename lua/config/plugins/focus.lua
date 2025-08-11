@@ -7,7 +7,7 @@ return {
 	  commands = true,
 	  autoresize = {
 		enable = true,
-		minwidth = 130,    -- Minimum width of unfocused windows
+		maxwidth = 120,
 		minheight = 5,    -- Minimum height of unfocused windows
 		height_quickfix = 10, -- Quickfix window height
 	  },
