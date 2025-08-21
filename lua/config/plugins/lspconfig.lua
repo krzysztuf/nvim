@@ -18,6 +18,16 @@ return {
 			"<cmd>lua vim.diagnostic.open_float()<CR>",
 			desc = "Toggle Spectre",
 		},
+		{
+			"g]",
+			"<cmd>lua vim.diagnostic.goto_next()<CR>",
+			desc = "Toggle Spectre",
+		},
+		{
+			"g[",
+			"<cmd>lua vim.diagnostic.goto_prev()<CR>",
+			desc = "Toggle Spectre",
+		},
 	},
 	init_options = {
 		compilationDatabasePath = ".", 
