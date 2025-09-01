@@ -4,6 +4,7 @@ vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.wrap = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -14,10 +15,25 @@ local function make_transparent()
     vim.api.nvim_set_hl(0, "NonText", { bg = "none" })
     vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
     vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+    
+    -- Configure hover popup to be visible
+    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#1e1e2e", fg = "#cdd6f4" })
+    vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#1e1e2e", fg = "#89b4fa" })
 end
 
 vim.api.nvim_create_autocmd("ColorScheme", {
     callback = make_transparent
+})
+
+-- Set global floating window defaults
+vim.o.winblend = 0
+
+-- Ensure hover popup is always visible after any colorscheme change
+vim.api.nvim_create_autocmd("ColorScheme", {
+    callback = function()
+        vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#2a2a2a", fg = "#ffffff" })
+        vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#2a2a2a", fg = "#6495ed" })
+    end
 })
 
 local keymap = vim.keymap.set

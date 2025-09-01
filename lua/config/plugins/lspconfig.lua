@@ -1,6 +1,16 @@
 return {
 	"neovim/nvim-lspconfig",
 	event = "BufReadPre",
+	dependencies = {
+		{
+			"williamboman/mason.nvim",
+			opts = function(_, opts)
+				opts.ensure_installed = opts.ensure_installed or {}
+				vim.list_extend(opts.ensure_installed, { "omnisharp" })
+			end,
+		},
+		"williamboman/mason-lspconfig.nvim",
+	},
 	config = function()
 		require("lspconfig").clangd.setup({
 			cmd = { 
@@ -11,10 +21,40 @@ return {
 			filetypes = { "c", "cpp", "objc", "objcpp" },
 			root_dir = require("lspconfig.util").root_pattern("compile_commands.json", ".git"),
 		})
+
+		local mason_registry = require("mason-registry")
+		if mason_registry.is_installed("omnisharp") then
+			require("lspconfig").omnisharp.setup({
+				cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+				filetypes = { "cs", "vb" },
+				root_dir = require("lspconfig.util").root_pattern("*.sln", "*.csproj", "omnisharp.json", "function.json"),
+				on_attach = function(client, bufnr)
+					-- Enable completion triggered by <c-x><c-o>
+					vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+				end,
+				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			})
+		end
 	end,
 	keys = {
 		{
+			"<C-k>",
+			function() vim.lsp.buf.signature_help() end,
+			mode = "i",
+			desc = "Signature help",
+		},
+		{
 			"<F1>",
+			function() require("hover").hover() end,
+			desc = "hover.nvim",
+		},
+		{
+			"ca",
+			function() vim.lsp.buf.code_action() end,
+			desc = "Toggle Spectre",
+		},
+		{
+			"<S-F1>",
 			"<cmd>lua vim.diagnostic.open_float()<CR>",
 			desc = "Toggle Spectre",
 		},

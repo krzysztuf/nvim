@@ -16,7 +16,7 @@ return {
 	end,
 	cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
 	keys = {
-	    { "<c-space>", desc = "Increment Selection" },
+	    { "<c-s>", desc = "Increment Selection" },
 	    { "<bs>", desc = "Decrement Selection", mode = "x" },
 	},
 	opts_extend = { "ensure_installed" },
@@ -25,9 +25,14 @@ return {
 	opts = {
 	    highlight = { enable = true },
 	    indent = { enable = true },
+	    -- Fix Windows compilation issues
+	    auto_install = false,
+	    sync_install = false,
+	    compilers = { "cl" },
 	    ensure_installed = {
 		"bash",
 		"c",
+		"c_sharp",
 		"cpp",
 		"dart",
 		"diff",
@@ -56,8 +61,8 @@ return {
 	    incremental_selection = {
 		enable = true,
 		keymaps = {
-		    init_selection = "<C-space>",
-		    node_incremental = "<C-space>",
+		    init_selection = "<C-s>",
+		    node_incremental = "<C-s>",
 		    scope_incremental = false,
 		    node_decremental = "<bs>",
 		},
