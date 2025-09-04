@@ -43,3 +43,4 @@ local expr_opts = { noremap = true, expr = true, silent = true }
 keymap('n', '<M-Tab>', '<C-w>w', default_opts)
 keymap('n', '<M-S-Tab>', '<C-w>W', default_opts)
 
+
