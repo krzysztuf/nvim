@@ -9,6 +9,12 @@ return {
 
 	  telescope.setup({
 		defaults = {
+		  file_ignore_patterns = {
+			"%.g%.dart$",
+			"%.freezed%.dart$",
+			"%.gr%.dart$",
+			"%.config%.dart$",
+		  },
 		  mappings = {
 			i = {
 			  ["<CR>"] = "select_default",
