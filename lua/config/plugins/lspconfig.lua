@@ -17,9 +17,21 @@ return {
 				"clangd", 
 				"--background-index",
 				"--compile-commands-dir=.",
+				"-j=8",
+				"--pch-storage=memory",
+				--"--limit-references=400",
 			},
 			filetypes = { "c", "cpp", "objc", "objcpp" },
 			root_dir = require("lspconfig.util").root_pattern("compile_commands.json", ".git"),
+			init_options = {
+				compilationDatabasePath = ".",
+				fallbackFlags = {
+					"-IC:/Users/krzys/projects/esigma/libs/3rd_party_3.3.0/Fluid-2.0.0/include",
+					"-IC:/Users/krzys/projects/esigma/libs/ESDK_3.3.2/include", 
+					"-IC:/Users/krzys/projects/esigma/libs/GUISDK_3.3.2/include",
+					"-std=c++20",
+				}
+			},
 		})
 
 		local mason_registry = require("mason-registry")
@@ -68,8 +80,5 @@ return {
 			"<cmd>lua vim.diagnostic.goto_prev()<CR>",
 			desc = "Toggle Spectre",
 		},
-	},
-	init_options = {
-		compilationDatabasePath = ".", 
 	},
 }

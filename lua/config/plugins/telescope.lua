@@ -43,7 +43,14 @@ return {
 		}
 	  })
 
-	  vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+	  vim.keymap.set('n', '<leader>ff', function()
+		builtin.find_files({
+		  search_dirs = {
+			".",
+			"C:\\Users\\krzys\\projects\\esigma\\libs\\3rd_party_3.3.0\\Fluid-2.0.0\\include"
+		  }
+		})
+	  end, { desc = 'Telescope find files (including Fluid)' })
 	  vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 	  vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 	  vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
