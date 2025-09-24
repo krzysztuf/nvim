@@ -31,7 +31,7 @@ return {
       },
     },
     keys = {
-      { "s", mode = { "n", "x", "o" }, function() 
+      { "s", mode = { "n" }, function() 
         require("flash").jump({
           search = { 
             mode = "search", 

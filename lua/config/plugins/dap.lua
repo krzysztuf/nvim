@@ -64,6 +64,7 @@ return {
 			vim.keymap.set("n", "<Leader>dc", dap.continue, {})
 			vim.keymap.set("n", "<Leader>dx", dap.terminate, {})
 			vim.keymap.set("n", "<Leader>do", dap.step_over, {})
+			vim.keymap.set("n", "<Leader>du", dapui.close, {})
 		end,
 	}
 }
