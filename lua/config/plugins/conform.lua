@@ -35,6 +35,12 @@ return {
 		},
 	},
 	init = function()
-		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+		-- Only set formatexpr for specific filetypes to avoid conflicts with indentation
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = { "c", "cpp", "h", "hpp", "cs", "dart" },
+			callback = function()
+				vim.bo.formatexpr = "v:lua.require'conform'.formatexpr()"
+			end,
+		})
 	end,
 }

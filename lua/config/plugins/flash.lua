@@ -13,7 +13,7 @@ return {
       },
       modes = {
         search = {
-          enabled = true,
+          enabled = false,
           highlight = { backdrop = false },  -- Disable backdrop for SSH
           jump = { history = true, register = true, nohlsearch = true },
         },
