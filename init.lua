@@ -36,6 +36,14 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     end
 })
 
+-- Configure diagnostics with borders
+vim.diagnostic.config({
+    float = {
+        border = "rounded",
+        source = "always",
+    },
+})
+
 local keymap = vim.keymap.set
 local default_opts = { noremap = true, silent = true }
 local expr_opts = { noremap = true, expr = true, silent = true }
