@@ -44,3 +44,14 @@ vim.opt_local.indentexpr = ""
 vim.opt_local.cinoptions = "g0,h1s,i4,N-s,t0,+4,(0,u0,w1,m1"
 
 vim.keymap.set('n', '<F4>', toggle_header_source, { desc = 'Toggle between header and source' })
+
+-- Override telescope find_files for C++ projects to include Fluid
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', function()
+	builtin.find_files({
+		search_dirs = {
+			".",
+			"C:\\Users\\krzys\\projects\\esigma\\libs\\3rd_party_3.3.0\\Fluid-2.0.0\\include"
+		}
+	})
+end, { desc = 'Telescope find files (including Fluid)', buffer = true })
