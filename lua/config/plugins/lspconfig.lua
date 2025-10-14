@@ -6,7 +6,7 @@ return {
 			"williamboman/mason.nvim",
 			opts = function(_, opts)
 				opts.ensure_installed = opts.ensure_installed or {}
-				vim.list_extend(opts.ensure_installed, { "omnisharp" })
+				vim.list_extend(opts.ensure_installed, { "omnisharp", "pyright" })
 			end,
 		},
 		"williamboman/mason-lspconfig.nvim",
@@ -45,6 +45,21 @@ return {
 					vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 				end,
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			})
+		end
+
+		if mason_registry.is_installed("pyright") then
+			require("lspconfig").pyright.setup({
+				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+				settings = {
+					python = {
+						analysis = {
+							diagnosticSeverityOverrides = {
+								reportLineTooLong = "none",
+							},
+						},
+					},
+				},
 			})
 		end
 	end,
