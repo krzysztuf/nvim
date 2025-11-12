@@ -15,6 +15,7 @@ return {
 			"%.gr%.dart$",
 			"%.config%.dart$",
 		  },
+		  path_display = { "tail" },
 		  mappings = {
 			i = {
 			  ["<CR>"] = "select_default",
@@ -39,6 +40,9 @@ return {
 			fname_width = 30,
 			symbol_width = 50,
 			symbol_type_width = 12,
+		  },
+		  lsp_references = {
+			path_display = { "tail" },
 		  },
 		}
 	  })

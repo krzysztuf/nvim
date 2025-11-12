@@ -12,7 +12,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 	},
 	config = function()
-		require("lspconfig").clangd.setup({
+		vim.lsp.config.clangd = {
 			cmd = { 
 				"clangd", 
 				"--background-index",
@@ -22,7 +22,7 @@ return {
 				--"--limit-references=400",
 			},
 			filetypes = { "c", "cpp", "objc", "objcpp" },
-			root_dir = require("lspconfig.util").root_pattern("compile_commands.json", ".git"),
+			root_dir = vim.fs.root(0, {"compile_commands.json", ".git"}),
 			init_options = {
 				compilationDatabasePath = ".",
 				fallbackFlags = {
@@ -32,24 +32,24 @@ return {
 					"-std=c++20",
 				}
 			},
-		})
+		}
 
 		local mason_registry = require("mason-registry")
 		if mason_registry.is_installed("omnisharp") then
-			require("lspconfig").omnisharp.setup({
+			vim.lsp.config.omnisharp = {
 				cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
 				filetypes = { "cs", "vb" },
-				root_dir = require("lspconfig.util").root_pattern("*.sln", "*.csproj", "omnisharp.json", "function.json"),
+				root_dir = vim.fs.root(0, {"*.sln", "*.csproj", "omnisharp.json", "function.json"}),
 				on_attach = function(client, bufnr)
 					-- Enable completion triggered by <c-x><c-o>
 					vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 				end,
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
-			})
+			}
 		end
 
 		if mason_registry.is_installed("pyright") then
-			require("lspconfig").pyright.setup({
+			vim.lsp.config.pyright = {
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
 				settings = {
 					python = {
@@ -59,8 +59,15 @@ return {
 							},
 						},
 					},
+					pylsp = {
+						plugins = {
+							pycodestyle = {
+								enabled = false,
+							},
+						},
+					},
 				},
-			})
+			}
 		end
 	end,
 	keys = {
