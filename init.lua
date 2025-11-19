@@ -5,7 +5,6 @@ vim.opt.tabstop = 4
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.wrap = false
-vim.opt.clipboard = "unnamedplus"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.keymap.set('n', '<Esc>', ':noh<CR>', { silent = true })
